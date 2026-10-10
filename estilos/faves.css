@@ -1,0 +1,146 @@
+/* ── corpo ─────────────────────────────────────── */
+body.faves-body {
+  display: block;
+  height: auto;
+  min-height: 100vh;
+  overflow-y: auto;
+  align-items: unset;
+}
+
+/* ── layout principal ───────────────────────────── */
+.faves-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ── sidebar de marca-páginas ───────────────────── */
+.bookmarks-sidebar {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 70px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding-top: 130px; /* alinha o topo das tabs com o topo da 1ª fileira de cards */
+  gap: 12px;
+}
+
+.bookmark-tab {
+  writing-mode: vertical-lr;
+  padding: 20px 14px;
+  width: 50px;
+  min-height: 140px;
+  border: none;
+  font-family: 'Caveat', cursive;
+  font-size: 22px;
+  letter-spacing: 3px;
+  cursor: pointer;
+  border-radius: 8px 0 0 8px;
+  transition: width 0.2s, opacity 0.2s;
+  opacity: 0.6;
+  animation: tabIn 0.5s ease both;
+}
+/* fade a partir de 0; o 'to' herda a opacidade natural (0.6/1) da tab */
+@keyframes tabIn { from { opacity: 0; translate: -10px 0; } }
+.bookmark-tab:nth-child(1) { animation-delay: 0.1s; }
+.bookmark-tab:nth-child(2) { animation-delay: 0.2s; }
+
+.bookmark-tab.active {
+  width: 60px;
+  opacity: 1;
+}
+
+.bookmark-tab:hover:not(.active) {
+  opacity: 0.85;
+  width: 55px;
+}
+
+/* cores individuais */
+.bookmark-animes        { background: #e8b8c8; color: #6a2a40; }
+.bookmark-animes.active { background: #e090ac; }
+
+.bookmark-jogos         { background: #d8a878; color: #5a3318; }
+.bookmark-jogos.active  { background: #c4824a; }
+
+/* ── área de conteúdo ───────────────────────────── */
+.faves-main {
+  flex: 1;
+  padding: 40px 50px 60px 24px;
+  overflow-y: auto;
+}
+
+.faves-title {
+  font-family: 'Griffy', 'Caveat', cursive;
+  font-size: 46px;
+  color: #775c56;
+  margin: 0 0 28px;
+  font-weight: 400;
+  text-transform: lowercase;
+}
+
+/* ── grid de cards ─────────────────────────────── */
+.faves-section[hidden] { display: none; }
+
+.faves-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+}
+
+.fave-card {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  background: rgba(160, 130, 115, 0.13);
+  border-radius: 8px;
+  border: 2px solid rgba(150, 115, 100, 0.22);
+  overflow: hidden;
+  transition: transform 0.15s, box-shadow 0.2s, border-color 0.2s;
+}
+
+.fave-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* caixinha sobreposta na base do card com o nome */
+.fave-nome {
+  position: absolute;
+  left: 6px;
+  right: 6px;
+  bottom: 6px;
+  background: rgba(119, 92, 86, 0.88);
+  color: #fff;
+  font-family: 'Caveat', cursive;
+  font-size: 18px;
+  line-height: 1.1;
+  text-align: center;
+  padding: 3px 6px;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(80, 55, 50, 0.25);
+}
+
+.fave-card:hover {
+  transform: scale(1.03);
+  border-color: rgba(150, 115, 100, 0.45);
+  box-shadow: 0 8px 20px rgba(120, 90, 75, 0.18);
+}
+
+/* entrada dos cards no load e ao trocar de seção (.is-entering via JS) */
+.faves-section:not([hidden]) .fave-card,
+.faves-section.is-entering .fave-card {
+  animation: fadeUp 0.45s ease both;
+}
+.faves-grid .fave-card:nth-child(1) { animation-delay: 0.02s; }
+.faves-grid .fave-card:nth-child(2) { animation-delay: 0.06s; }
+.faves-grid .fave-card:nth-child(3) { animation-delay: 0.10s; }
+.faves-grid .fave-card:nth-child(4) { animation-delay: 0.14s; }
+.faves-grid .fave-card:nth-child(5) { animation-delay: 0.18s; }
+.faves-grid .fave-card:nth-child(6) { animation-delay: 0.22s; }
+.faves-grid .fave-card:nth-child(7) { animation-delay: 0.26s; }
+.faves-grid .fave-card:nth-child(8) { animation-delay: 0.30s; }
+.faves-grid .fave-card:nth-child(9) { animation-delay: 0.34s; }
+.faves-grid .fave-card:nth-child(10) { animation-delay: 0.38s; }

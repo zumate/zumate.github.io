@@ -1,0 +1,154 @@
+/* ── polimento global (transições + animações compartilhadas) ── */
+html { scroll-behavior: smooth; }
+
+/* fade-in da página ao carregar (funciona mesmo sem JS) */
+body { animation: pageIn 0.4s ease both; }
+@keyframes pageIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* fade-out ao navegar (classe adicionada por efeitos.js) */
+body.is-leaving { animation: none; opacity: 0; transition: opacity 0.25s ease; }
+
+/* sobe + aparece — usado em entradas */
+@keyframes fadeUp {
+  from { opacity: 0; translate: 0 16px; }
+  to   { opacity: 1; translate: 0 0; }
+}
+
+/* pop-in dos cards: opacidade + escala independente */
+@keyframes cardIn {
+  from { opacity: 0; scale: 0.92; }
+  to   { opacity: 1; scale: 1; }
+}
+
+/* respeita quem prefere menos movimento */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+    translate: none !important;
+    scale: none !important;
+  }
+  body { opacity: 1 !important; }
+}
+
+.titulo{
+text-align:center;
+font-family:'Griffy', 'Caveat', cursive;
+color: #775c56;
+font-weight: 400;
+font-size:46px;
+margin-top:48px;
+margin-bottom:0;
+}
+
+.subtitulo{
+text-align:center;
+font-family:'Caveat', cursive;
+color: #9d7a72;
+font-weight:500;
+font-size:24px;
+margin-top:4px;
+}
+
+body{
+margin:0;
+min-height:100vh;
+background:
+radial-gradient(circle at center, rgba(30, 30, 30, 0.15), rgba(61, 56, 56, 0) 70%),
+radial-gradient(circle, rgba(53, 48, 48, 0.07) 3px, transparent 3px) 0 0/40px 40px,
+radial-gradient(circle, rgba(57, 52, 52, 0.07) 3px, transparent 3px) 20px 20px/40px 40px,
+linear-gradient(180deg,#fffdfa,#ffead3);
+background-size:40px 40px, 100% 100%;
+background-attachment:fixed;
+display:flex;
+flex-direction:column;
+align-items: center;
+height:100vh;
+margin:0px;
+}
+
+.carrossel{
+display:flex;
+align-items:center;
+justify-content:center;
+align-self:stretch;
+position:relative;
+padding:20px 0;
+flex:1;            /* ocupa o espaço abaixo do texto e centraliza a imagem ampliada */
+min-height:0;
+}
+
+.prev, .next{
+position:absolute;
+top:50%;
+transform:translateY(-50%);
+z-index:2;
+}
+
+.prev{ left:15px; }
+.next{ right:15px; }
+
+.imagens{
+display:flex;
+gap:15px;
+}
+
+.imagens img{
+width:clamp(60px, 19vw, 300px);
+height:clamp(60px, 19vw, 300px);
+object-fit:cover;
+opacity:0.6;
+transform:scale(1.3);
+transition:0.4s;
+}
+
+.imagens img.ativa{
+opacity:1;
+transform:scale(2.3);
+}
+
+.subtitulo{
+margin-bottom:0;
+}
+
+/* entrada da galeria */
+.carrossel{ animation: fadeUp 0.6s ease 0.25s both; }
+
+/* ── botão sair (páginas internas) ───────────────── */
+.btn-sair {
+  position: fixed;
+  top: 18px;
+  right: 22px;
+  z-index: 50;
+  font-family: 'Caveat', cursive;
+  font-size: 22px;
+  color: #775c56;
+  background: rgba(255, 255, 255, 0.7);
+  border: 2px solid rgba(150, 115, 100, 0.3);
+  border-radius: 22px;
+  padding: 5px 20px;
+  text-decoration: none;
+  cursor: pointer;
+  backdrop-filter: blur(2px);
+  transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
+  animation: fadeUp 0.5s ease both;
+}
+.btn-sair:hover {
+  transform: scale(1.05);
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 4px 12px rgba(160, 100, 70, 0.22);
+}
+
+button{
+color: #775c56;
+width: 60px;
+height: 60px;
+font-size: 35px;
+border-style:solid;
+border-width: 0.2ch;
+border-color: #775c56;
+border-radius: 10ch;
+background:#ffd3d4;
+cursor:pointer;
+}

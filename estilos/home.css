@@ -1,0 +1,275 @@
+body.home {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  height: 100vh;
+}
+
+.home-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+/* wrapper dos cards: escala o conjunto inteiro como grupo
+   (sizes + espaçamentos crescem juntos) e desloca pra direita */
+.home-cards {
+  position: absolute;
+  inset: 0;
+  transform: translate(6%, 8%) scale(1.1);
+  transform-origin: center;
+  /* botões acima da personagem (char-img é z-index 0) */
+  z-index: 2;
+  /* parallax do mouse (efeitos.js define --px/--py) */
+  translate: var(--px, 0) var(--py, 0);
+  transition: translate 0.3s ease;
+}
+
+/* ── título do site (sobre a personagem) ─────────── */
+.home-title {
+  position: absolute;
+  top: 5%;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  text-align: center;
+  pointer-events: none;
+  animation: pageIn 0.7s ease 0.1s both;
+}
+
+.home-title h1 {
+  margin: 0;
+  font-family: 'Griffy', 'Caveat', cursive;
+  font-weight: 400;
+  font-size: clamp(40px, 6vw, 96px);
+  color: #775c56;
+  line-height: 1;
+}
+
+.home-title p {
+  margin: 6px 0 0;
+  font-family: 'Caveat', cursive;
+  font-weight: 500;
+  font-size: clamp(18px, 2vw, 30px);
+  color: #9d7a72;
+}
+
+.home-card {
+  position: absolute;
+  background-image: url('../imagens/box.webp');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: 'Caveat', cursive;
+  font-size: clamp(15px, 1.6vw, 30px);
+  color: #775c56;
+  cursor: pointer;
+  text-decoration: none;
+  line-height: 1.15;
+  padding: 1.5% 3%;
+  box-sizing: border-box;
+  overflow: hidden;
+  z-index: 1;
+  transition: transform 0.25s cubic-bezier(.34,1.56,.64,1), filter 0.25s;
+  /* entrada só com fade (opacity) — sem scale/translate, que faziam as
+     bordas dos cards "subirem" ao crescer a cada reload. */
+  animation: pageIn 0.55s ease var(--in-delay, 0s) both;
+}
+
+/* stagger da entrada */
+.home-cards .home-card:nth-child(1) { --in-delay: 0.05s; }
+.home-cards .home-card:nth-child(2) { --in-delay: 0.12s; }
+.home-cards .home-card:nth-child(3) { --in-delay: 0.19s; }
+.home-cards .home-card:nth-child(4) { --in-delay: 0.26s; }
+.home-cards .home-card:nth-child(5) { --in-delay: 0.33s; }
+.home-cards .home-card:nth-child(6) { --in-delay: 0.40s; }
+
+.home-card:hover {
+  transform: scale(1.06) rotate(-1deg);
+  filter: drop-shadow(0 8px 18px rgba(160, 100, 70, 0.35)) brightness(1.04);
+  z-index: 2;
+}
+
+/* MIX de caixas:
+   - box.webp     → paisagem, razão 825/560 = 1.473  (carrossel, sobre, desenhos)
+   - caixa-2.webp → ~quadrada, razão 464/478 = 0.971  (extra, portfolio, faves)
+   Para os quadrados mantemos a MESMA altura do landscape e só estreitamos
+   a largura (h × 0.971), evitando sobreposição. */
+.card-caixa2 {
+  background-image: url('../imagens/caixa-2.webp');
+}
+
+.card-extra {
+  left: 13%;
+  top: 6%;
+  width: 10.54vw;
+  height: 10.86vw;
+}
+
+.card-carrossel {
+  left: 3%;
+  top: 29%;
+  width: 19vw;
+  height: 12.90vw;
+}
+
+.card-portfolio {
+  left: 25%;
+  top: 28%;
+  width: 18vw;
+  height: 12.22vw;
+}
+
+.card-sobre {
+  left: 46%;
+  top: 24%;
+  width: 10.54vw;
+  height: 10.86vw;
+}
+
+.card-desenhos {
+  left: 14%;
+  top: 56%;
+  width: 19vw;
+  height: 12.90vw;
+}
+
+.card-faves {
+  left: 37%;
+  top: 55%;
+  width: 11.87vw;
+  height: 12.22vw;
+}
+
+.char-img {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  height: 100%;
+  width: auto;
+  pointer-events: none;
+  z-index: 0;
+  /* parallax inverso pra dar profundidade */
+  translate: var(--cx, 0) var(--cy, 0);
+  transition: translate 0.3s ease;
+}
+
+/* ── pop-ups (modais) ─────────────────────────────── */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 28px;
+  box-sizing: border-box;
+  overflow-y: auto;
+  background: rgba(60, 45, 40, 0.45);
+  backdrop-filter: blur(3px);
+  animation: pageIn 0.25s ease both;
+}
+.modal-backdrop[hidden] { display: none; }
+
+.modal {
+  position: relative;
+  margin: auto; /* centraliza quando cabe; rola quando é alto demais */
+  background: linear-gradient(180deg, #fffdfa, #ffead3);
+  border: 3px solid #775c56;
+  border-radius: 16px;
+  padding: 18px;
+  box-shadow: 0 18px 50px rgba(80, 55, 50, 0.35);
+  max-width: min(680px, 92vw);
+  overflow: visible; /* não corta o botão de fechar */
+}
+
+.modal-img { display: block; width: 100%; height: auto; border-radius: 8px; }
+
+.modal-close {
+  position: absolute;
+  top: -14px;
+  right: -14px;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Arial, sans-serif;
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 1;
+  border: 2px solid #775c56;
+  border-radius: 50%;
+  background: #ffd3d4;
+  color: #775c56;
+  cursor: pointer;
+  z-index: 3;
+  box-shadow: 0 3px 8px rgba(80, 55, 50, 0.3);
+  transition: transform 0.2s, background 0.2s;
+}
+.modal-close:hover { transform: scale(1.12); background: #ffc0c2; }
+
+/* sobre: a própria imagem já é a caixa — sem moldura do modal */
+.modal-sobre-box {
+  background: none;
+  border: none;
+  padding: 0;
+  box-shadow: none;
+  overflow: visible;
+  transform-origin: left center;
+  animation: sobreOut 0.4s cubic-bezier(.34, 1.45, .64, 1) both;
+}
+.modal-sobre-box .modal-img {
+  border-radius: 12px;
+  filter: drop-shadow(0 18px 40px rgba(80, 55, 50, 0.4));
+}
+@keyframes sobreOut {
+  from { opacity: 0; translate: -40px 0; scale: 0.55; }
+  to   { opacity: 1; translate: 0 0;     scale: 1; }
+}
+
+/* desenhos em destaque */
+.modal-desenhos-box {
+  max-width: min(760px, 94vw);
+  animation: fadeUp 0.4s ease both;
+}
+.modal-titulo {
+  font-family: 'Griffy', 'Caveat', cursive;
+  font-weight: 400;
+  color: #775c56;
+  font-size: clamp(22px, 3vw, 34px);
+  text-align: center;
+  margin: 4px 0 16px;
+  text-transform: lowercase;
+}
+.desenhos-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  align-items: start;
+}
+.desenhos-grid img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  border: 2px solid rgba(150, 115, 100, 0.3);
+}
+
+/* ── billzinhas (explosão ao clicar em "Extra") ───── */
+.billzinha {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 90;
+  width: 46px;
+  height: auto;
+  pointer-events: none;
+  will-change: transform, opacity;
+}

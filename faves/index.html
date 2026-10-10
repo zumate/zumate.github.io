@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Faves — Site Zucco</title>
+<link rel="stylesheet" href="../estilos/estilos.css">
+<link rel="stylesheet" href="../estilos/faves.css">
+<link rel="icon" href="../imagens/euzita 2.0.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=Griffy&display=swap" rel="stylesheet">
+</head>
+
+<body class="faves-body">
+
+<a href="../index.html" class="btn-sair">← sair</a>
+
+<div class="faves-layout">
+
+  <!-- Marca-páginas laterais -->
+  <aside class="bookmarks-sidebar">
+    <button class="bookmark-tab bookmark-animes active" onclick="trocarSecao('animes', this)">animes</button>
+    <button class="bookmark-tab bookmark-jogos"         onclick="trocarSecao('jogos',  this)">jogos</button>
+  </aside>
+
+  <!-- Conteúdo principal -->
+  <main class="faves-main">
+
+    <h1 class="faves-title" id="faves-titulo">animes</h1>
+
+    <section class="faves-section" id="animes">
+      <div class="faves-grid">
+        <div class="fave-card"><img src="../imagens/fotos%20anime/apotecaria.webp" alt="Diários de uma Apotecária"><span class="fave-nome">Diários de uma Apotecária</span></div>
+        <div class="fave-card"><img src="../imagens/fotos%20anime/doukyuusei.webp" alt="Doukyuusei"><span class="fave-nome">Doukyuusei</span></div>
+        <div class="fave-card"><img src="../imagens/fotos%20anime/goldenkamuy.webp" alt="Golden Kamuy"><span class="fave-nome">Golden Kamuy</span></div>
+        <div class="fave-card"><img src="../imagens/fotos%20anime/jojo.webp" alt="JoJo's Bizarre Adventure: Stone Ocean"><span class="fave-nome">JoJo's Bizarre Adventure: Stone Ocean</span></div>
+        <div class="fave-card"><img src="../imagens/fotos%20anime/jujutsu.webp" alt="Jujutsu Kaisen"><span class="fave-nome">Jujutsu Kaisen</span></div>
+        <div class="fave-card"><img src="../imagens/fotos%20anime/lookback.webp" alt="Look Back"><span class="fave-nome">Look Back</span></div>
+        <div class="fave-card"><img src="../imagens/fotos%20anime/saiki.webp" alt="Saiki Kusuo no Psi-nan"><span class="fave-nome">Saiki Kusuo no Psi-nan</span></div>
+        <div class="fave-card"><img src="../imagens/fotos%20anime/silentvoice.webp" alt="A Silent Voice"><span class="fave-nome">A Silent Voice</span></div>
+        <div class="fave-card"><img src="../imagens/fotos%20anime/takopi.webp" alt="Takopi's Original Sin"><span class="fave-nome">Takopi's Original Sin</span></div>
+        <div class="fave-card"><img src="../imagens/fotos%20anime/yourname.webp" alt="Your Name"><span class="fave-nome">Your Name</span></div>
+      </div>
+    </section>
+
+    <section class="faves-section" id="jogos" hidden>
+      <div class="faves-grid">
+        <div class="fave-card"><img src="../imagens/fotos%20jogos/botw.webp" alt="Zelda: Breath of the Wild"><span class="fave-nome">Zelda: Breath of the Wild</span></div>
+        <div class="fave-card"><img src="../imagens/fotos%20jogos/danganronpa.webp" alt="Danganronpa 2"><span class="fave-nome">Danganronpa 2</span></div>
+        <div class="fave-card"><img src="../imagens/fotos%20jogos/deltarune.png" alt="Deltarune"><span class="fave-nome">Deltarune</span></div>
+        <div class="fave-card"><img src="../imagens/fotos%20jogos/genshin.webp" alt="Genshin Impact"><span class="fave-nome">Genshin Impact</span></div>
+        <div class="fave-card"><img src="../imagens/fotos%20jogos/hsr.webp" alt="Honkai: Star Rail"><span class="fave-nome">Honkai: Star Rail</span></div>
+        <div class="fave-card"><img src="../imagens/fotos%20jogos/omori.webp" alt="Omori"><span class="fave-nome">Omori</span></div>
+        <div class="fave-card"><img src="../imagens/fotos%20jogos/splatoon.webp" alt="Splatoon 2"><span class="fave-nome">Splatoon 2</span></div>
+        <div class="fave-card"><img src="../imagens/fotos%20jogos/totk.webp" alt="Zelda: Tears of the Kingdom"><span class="fave-nome">Zelda: Tears of the Kingdom</span></div>
+        <div class="fave-card"><img src="../imagens/fotos%20jogos/yakuza0.webp" alt="Yakuza 0"><span class="fave-nome">Yakuza 0</span></div>
+        <div class="fave-card"><img src="../imagens/fotos%20jogos/yakuza3.webp" alt="Yakuza 3"><span class="fave-nome">Yakuza 3</span></div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+function trocarSecao(nome, btn) {
+  document.querySelectorAll('.faves-section').forEach(s => { s.hidden = true; s.classList.remove('is-entering'); });
+  document.querySelectorAll('.bookmark-tab').forEach(b => b.classList.remove('active'));
+  const sec = document.getElementById(nome);
+  sec.hidden = false;
+  void sec.offsetWidth; // força reflow pra reiniciar a animação de entrada
+  sec.classList.add('is-entering');
+  btn.classList.add('active');
+  document.getElementById('faves-titulo').textContent = nome;
+}
+</script>
+<script src="../efeitos.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Site Zucco</title>
+<link rel="stylesheet" href="estilos/estilos.css">
+<link rel="stylesheet" href="estilos/home.css">
+<link rel="icon" href="imagens/euzita 2.0.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=Griffy&display=swap" rel="stylesheet">
+</head>
+
+<body class="home">
+
+<div class="home-container">
+
+  <div class="home-title">
+    <h1>Zusite</h1>
+    <p>seja bem-vindo à minha página!</p>
+  </div>
+
+  <div class="home-cards">
+    <a href="https://www.behance.net/gabrielroiffz" target="_blank" class="home-card card-caixa2 card-extra">Extra</a>
+    <a href="galeria/index.html" class="home-card card-carrossel">Carrossel</a>
+    <a href="https://almondine-trader-a14.notion.site/Gabriela-Zucco-Portfolio-de-Design-3171c2d2d8e6805d87d8d5f72cb59fcf" target="_blank" class="home-card card-portfolio">Portfolio</a>
+    <div class="home-card card-caixa2 card-sobre">Sobre</div>
+    <div class="home-card card-desenhos">Desenhos em Destaque</div>
+    <a href="faves/index.html" class="home-card card-caixa2 card-faves">Favoritos</a>
+  </div>
+
+  <img src="imagens/personagem.webp" class="char-img" alt="personagem">
+
+</div>
+
+<!-- Pop-up: Sobre (sai do lado do card "sobre") -->
+<div class="modal-backdrop" id="modal-sobre" hidden>
+  <div class="modal modal-sobre-box" role="dialog" aria-label="Sobre">
+    <button class="modal-close" type="button" aria-label="Fechar">×</button>
+    <img src="imagens/sobre.webp" alt="Sobre a Zucco" class="modal-img">
+  </div>
+</div>
+
+<!-- Pop-up: Desenhos em destaque -->
+<div class="modal-backdrop" id="modal-desenhos" hidden>
+  <div class="modal modal-desenhos-box" role="dialog" aria-label="Desenhos em destaque">
+    <button class="modal-close" type="button" aria-label="Fechar">×</button>
+    <h2 class="modal-titulo">desenhos que fiz esse mês — junho 2026</h2>
+    <div class="desenhos-grid">
+      <img src="imagens/desenhos/desenhodestaque1.webp" alt="Desenho em destaque 1">
+      <img src="imagens/desenhos/desenhodestaque2.webp" alt="Desenho em destaque 2">
+    </div>
+  </div>
+</div>
+
+<script src="efeitos.js"></script>
+</body>
+</html>
